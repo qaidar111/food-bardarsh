@@ -1,0 +1,23 @@
+RewriteEngine On
+RewriteBase /pafe/
+
+# Handle PHP files directly
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^(.+)\.php$ $1.php [L]
+
+# Ensure directory access
+<IfModule mod_autoindex.c>
+  Options -Indexes
+</IfModule>
+
+# PHP settings
+<IfModule mod_php7.c>
+  php_flag display_errors On
+  php_value error_reporting E_ALL
+</IfModule>
+
+# Allow access to these files
+<Files "logout.php">
+  Order Allow,Deny
+  Allow from all
+</Files>
